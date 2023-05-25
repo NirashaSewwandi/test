@@ -227,83 +227,94 @@ plt.show()
 
 # In[ ]:
 
-
 # Create the Dash app
 # external_stylesheets = ['https://fonts.googleapis.com/css2?family=Open+Sans&display=swap']
 
 app = dash.Dash(__name__)
-server = app.server
 # app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # Define the layout of the dashboard
 app.layout = html.Div(
-#     style={'font-family': 'Open Sans'}, 
+    style={'font-family': 'Open Sans', 'background-color': '#034A66',"margin-bottom": "100px"}, 
     children=[
-    
-    html.H1('CO544-2023 Lab 3: Wine Quality Prediction'),
+    html.H1(style={'text-align': 'center','color':'white'}, children='E18329 CO544-2023 Lab 3: Wine Quality Prediction'),
+
+
     
     html.Div([
-        html.H3('Exploratory Data Analysis'),
-        html.Label('Feature 1 (X-axis)'),
+        html.H3(style={'text-align': 'center','color':'white'}, children='Exploratory Data Analysis'),
+        html.Label(style={'text-align': 'center','color':'white'}, children='Feature 1 (X-axis)'),
         dcc.Dropdown(
             id='x_feature',
             options=[{'label': col, 'value': col} for col in data.columns],
             value=data.columns[0]
         )
-    ], style={'width': '30%', 'display': 'inline-block'}),
+    ], style={'width': '30%', 'display': 'inline-block','padding': '40px'}),
     
     html.Div([
-        html.Label('Feature 2 (Y-axis)'),
+        html.Label(style={'text-align': 'center','color':'white'}, children='Feature 2 (Y-axis)'),
         dcc.Dropdown(
             id='y_feature',
             options=[{'label': col, 'value': col} for col in data.columns],
             value=data.columns[1]
         )
-    ], style={'width': '30%', 'display': 'inline-block'}),
+    ], style={'width': '30%', 'display': 'inline-block','padding': '40px'}),
     
-    dcc.Graph(id='correlation_plot'),
+    dcc.Graph(id='correlation_plot',style={'padding': '40px'}),
     
     # Wine quality prediction based on input feature values
-    html.H3("Wine Quality Prediction"),
+    html.H3(style={'text-align': 'center','color':'white'}, children="Wine Quality Prediction"),
     html.Div([
-        html.Label("Fixed Acidity"),
-        dcc.Input(id='fixed_acidity', type='number', required=True),    
-        html.Label("Volatile Acidity"),
+        html.Label("Fixed Acidity",style={'color':'white',"margin-right": "80px"}),
+        dcc.Input(id='fixed_acidity', type='number', required=True),  
+        
+        html.Label("Volatile Acidity",style={'color':'white',"margin-left": "10px","margin-right": "20px"}),
         dcc.Input(id='volatile_acidity', type='number', required=True), 
-        html.Label("Citric Acid"),
+        html.Label("Citric Acid",style={'color':'white',"margin-left": "10px","margin-right": "90px"}),
         dcc.Input(id='citric_acid', type='number', required=True),
         html.Br(),
         
-        html.Label("Residual Sugar"),
+        html.Label("Residual Sugar",style={'color':'white',"margin-right": "63px"}),
         dcc.Input(id='residual_sugar', type='number', required=True),  
-        html.Label("Chlorides"),
+        html.Label("Chlorides",style={'color':'white',"margin-left": "10px","margin-right": "58px"}),
         dcc.Input(id='chlorides', type='number', required=True), 
-        html.Label("Free Sulfur Dioxide"),
+        html.Label("Free Sulfur Dioxide",style={'color':'white',"margin-left": "10px","margin-right": "20px"}),
         dcc.Input(id='free_sulfur_dioxide', type='number', required=True),
         html.Br(),
         
-        html.Label("Total Sulfur Dioxide"),
+        html.Label("Total Sulfur Dioxide",style={'color':'white',"margin-right": "27px"}),
         dcc.Input(id='total_sulfur_dioxide', type='number', required=True),
-        html.Label("Density"),
+        html.Label("Density",style={'color':'white',"margin-left": "10px","margin-right": "71px"}),
         dcc.Input(id='density', type='number', required=True),
-        html.Label("pH"),
+        html.Label("pH",style={'color':'white',"margin-left": "10px","margin-right": "143px"}),
         dcc.Input(id='ph', type='number', required=True),
         html.Br(),
         
-        html.Label("Sulphates"),
+        html.Label("Sulphates",style={'color':'white',"margin-right": "100px"}),
         dcc.Input(id='sulphates', type='number', required=True),
-        html.Label("Alcohol"),
+        html.Label("Alcohol",style={'color':'white',"margin-left": "10px","margin-right": "72px"}),
         dcc.Input(id='alcohol', type='number', required=True),
         html.Br(),
-    ]),
+    ], style={'padding': '40px'}),
 
     html.Div([
-        html.Button('Predict', id='predict-button', n_clicks=0),
-    ]),
+        html.Button('Predict', id='predict-button', n_clicks=0,style={'background-color': 'black',
+        'color':'white',
+        
+        'padding': '10px 20px',
+       
+       
+        'border-radius':'4px'
+        }),
+    ],
+        style={'display': 'flex',
+                'justify-content': 'center',
+        'align-items':  'center'}
+    ),
 
     html.Div([
-        html.H4("Predicted Quality"),
-        html.Div(id='prediction-output')
+        html.H4(style={'text-align': 'center','color':'white'}, children="Predicted Quality"),
+        html.Div(id='prediction-output',style={'text-align': 'center','color':'white',"margin-bottom": "100px"})
     ])
 ])
 
